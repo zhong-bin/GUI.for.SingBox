@@ -10,13 +10,17 @@ COPY frontend/ .
 RUN npm run build
 
 # 2️⃣ 后端 Go 构建
-FROM golang:1.20-alpine AS backend-builder
+
+FROM golang:1.22-alpine AS backend-builder
+
+RUN apk add --no-cache git ca-certificates
+
 WORKDIR /app
 
 COPY go.mod go.sum ./
 RUN go mod download
+
 COPY . .
-COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o gui-singbox .
 
