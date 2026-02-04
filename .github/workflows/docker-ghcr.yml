@@ -34,4 +34,4 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/zhong-bin/gui.for.singbox:latest
